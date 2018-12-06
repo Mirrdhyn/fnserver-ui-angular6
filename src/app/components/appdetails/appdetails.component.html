@@ -1,0 +1,66 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Functions for {{appName}}
+      </h1>
+    </div>
+  </div>
+</section>
+<section *ngIf="functionFound; else nofunctionFound">
+  <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <div class="tile is-child tile_style" *ngFor="let function of functionsData">
+        <a [routerLink]="['/function', function.id]"><div class="box">
+          <p class="title is-5">{{function.name}}</p>
+          <p class="subtitle">Function ID : {{function.id}}</p>
+        </div></a>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #nofunctionFound>
+  <section class="hero is-warning">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          No function found for {{appName}}
+        </h1>
+      </div>
+    </div>
+  </section>
+</ng-template>
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Triggers for {{appName}}
+      </h1>
+    </div>
+  </div>
+</section>
+<section *ngIf="triggerFound; else noTriggerFound">
+  <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <div class="tile is-child tile_style" *ngFor="let trigger of triggersData">
+        <a [routerLink]="['/trigger', trigger.id]"><div class="box">
+          <p class="title is-5">{{trigger.name}}</p>
+          <p class="subtitle">Trigger ID : {{trigger.id}}</p>
+        </div></a>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #noTriggerFound>
+  <section class="hero is-warning">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          No trigger found for {{appName}}
+        </h1>
+      </div>
+    </div>
+  </section>
+</ng-template>

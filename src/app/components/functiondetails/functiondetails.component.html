@@ -1,0 +1,90 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        <nav class="breadcrumb is-large has-succeeds-separator" aria-label="breadcrumbs">
+          <ul>
+            <li><a [routerLink]="['/app/', appId]">Function detail for {{appName}}</a></li>
+            <li class="is-active"><a href="#" aria-current="page">{{functionDetailsData.name}}</a></li>
+          </ul>
+        </nav>
+      </h1>
+    </div>
+  </div>
+</section>
+<div class="container message_style" *ngIf="displayError">
+  <div class="notification is-danger">
+    <button class="delete" aria-label="delete" (click)='displayError = false;'></button>
+    Function not updated...
+  </div>
+</div>
+<div class="container message_style" *ngIf="displayUpdate">
+  <div class="notification is-success">
+    <button class="delete" aria-label="delete" (click)='displayUpdate = false;'></button>
+    Function updated
+  </div>
+</div>
+<section class="hero" *ngIf="functionDetailsFound; else noFunctionDetailsFound">
+  <div class="hero-body">
+    <form [formGroup]="functionForm">
+      <div class="columns is-centered">
+        <div class="column is-fullwidth">
+          <div class="field">
+            <label class="label is-left">ID</label>
+            <div class="control has-icons-left">
+              <input class="input is-info" type="text" placeholder="{{functionDetailsData.id}}" [value]="functionDetailsData.id" [ngModel]="functionDetailsData.id" formControlName="id" name="id" disabled>
+              <span class="icon is-small is-left"><i class="far fa-id-badge"></i></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-left">Name</label>
+            <div class="control has-icons-left">
+              <input class="input is-info" type="text" placeholder="{{functionDetailsData.name}}" [value]="functionDetailsData.name" [ngModel]="functionDetailsData.name" formControlName="name" name="name" (keyup.enter)='updateFunction()'>
+              <span class="icon is-small is-left"><i class="fas fa-tag"></i></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-left">Image</label>
+            <div class="control has-icons-left">
+              <input class="input is-primary" type="text" placeholder="{{functionDetailsData.image}}" [value]="functionDetailsData.image" [ngModel]="functionDetailsData.image" formControlName="image" name="image" (keyup.enter)='updateFunction()'>
+              <span class="icon is-small is-left"><i class="fas fa-compact-disc"></i></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-left">Memory</label>
+            <div class="control has-icons-left">
+              <input class="input is-primary" type="number" placeholder="{{functionDetailsData.memory}}" [value]="functionDetailsData.memory" [ngModel]="functionDetailsData.memory" formControlName="memory" name="memory" (keyup.enter)='updateFunction()'>
+              <span class="icon is-small is-left"><i class="fas fa-memory"></i></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-left">Timeout</label>
+            <div class="control has-icons-left">
+              <input class="input is-warning" type="number" placeholder="{{functionDetailsData.timeout}}" [value]="functionDetailsData.timeout" [ngModel]="functionDetailsData.timeout" formControlName="timeout" name="timeout" (keyup.enter)='updateFunction()'>
+              <span class="icon is-small is-left"><i class="fas fa-stopwatch"></i></span>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label is-left">Idle Timeout</label>
+            <div class="control has-icons-left">
+              <input class="input is-warning" type="number" placeholder="{{functionDetailsData.idle_timeout}}" [value]="functionDetailsData.idle_timeout" [ngModel]="functionDetailsData.idle_timeout" formControlName="idle_timeout" name="idle_timeout" (keyup.enter)='updateFunction()'>
+              <span class="icon is-small is-left"><i class="far fa-times-circle"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <br><button class="button is-link" aria-label="logs" [routerLink]="['/logs', fnId]">Show logs</button>
+  </div>
+</section>
+<ng-template #noFunctionDetailsFound>
+  <section class="hero is-warning">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          No function details found...
+        </h1>
+      </div>
+    </div>
+  </section>
+</ng-template>

@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+.tile_style {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.card_style {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.message_style {
+  top: 0px;
+  right: 0px;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.my_modal {
+  z-index: 20;
+}
+
+. {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}

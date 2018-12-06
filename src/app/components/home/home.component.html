@@ -1,0 +1,33 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Applications List
+      </h1>
+    </div>
+  </div>
+</section>
+<section *ngIf="appFound; else noAppFound">
+  <div class="tile is-ancestor">
+    <div class="tile is-parent">
+      <div class="tile is-child tile_style" *ngFor="let app of appsData">
+        <a [routerLink]="['/app', app.id]"><div class="box">
+          <p class="title is-5"> {{app.name}}</p>
+          <p class="subtitle">App ID : {{app.id}}</p>
+        </div></a>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #noAppFound>
+  <section class="hero is-warning">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          No application found on your Fn Server
+        </h1>
+      </div>
+    </div>
+  </section>
+</ng-template>

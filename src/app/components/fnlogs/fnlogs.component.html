@@ -1,0 +1,78 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        <nav class="breadcrumb is-large has-succeeds-separator" aria-label="breadcrumbs">
+          <ul>
+            <li><a [routerLink]="['/app/', appId]">Function logs for {{appName}}</a></li>
+            <li><a [routerLink]="['/function/', fnId]"> {{fnName}}</a></li>
+          </ul>
+        </nav>
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="hero" *ngIf="functionLogsFound; else noFunctionLogsFound">
+  <div class="hero-body">
+    <div class="columns is-centered" *ngFor="let functionlog of functionLogsData">
+      <div class="column is-fullwidth loglist">
+        <div class="field">
+          <label class="label is-left" [ngClass]="{ 'has-background-primary' : functionlog.status == 'success', 'has-background-warning' : functionlog.status == 'error'  }">ID</label>
+          <div class="control has-icons-left">
+            <input class="input is-info" type="text" placeholder="{{functionlog.id}}" [value]="functionlog.id">
+            <span class="icon is-small is-left"><i class="far fa-id-badge"></i></span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-left">Created at</label>
+          <div class="control has-icons-left">
+            <input class="input is-info" type="text" placeholder="{{functionlog.created_at | date:'yyyy-LLLL-dd EEEE hh:mm:ss:SSS a z'}}" [value]="functionlog.created_at | date:'yyyy-LLLL-dd EEEE hh:mm:ss:SSS a z'">
+            <span class="icon is-small is-left"><i class="fas fa-plus-circle"></i></span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-left">Started at</label>
+          <div class="control has-icons-left">
+            <input class="input is-primary" type="text" placeholder="{{functionlog.started_at | date:'yyyy-LLLL-dd EEEE hh:mm:ss:SSS a z'}}" [value]="functionlog.started_at | date:'yyyy-LLLL-dd EEEE hh:mm:ss:SSS a z'">
+            <span class="icon is-small is-left"><i class="fas fa-play-circle"></i></span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label is-left">Completed at</label>
+          <div class="control has-icons-left">
+            <input class="input is-danger" type="text" placeholder="{{functionlog.completed_at | date:'yyyy-LLLL-dd EEEE hh:mm:ss:SSS a z'}}" [value]="functionlog.completed_at | date:'yyyy-LLLL-dd EEEE hh:mm:ss:SSS a z'">
+            <span class="icon is-small is-left"><i class="fas fa-stop-circle"></i></span>
+          </div>
+        </div>
+        <br>
+        <button class="button is-link" aria-label="logs" (click)='showLog(functionlog.id)'>Show details</button>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #noFunctionLogsFound>
+  <section class="hero is-warning">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          No function logs found...
+        </h1>
+      </div>
+    </div>
+  </section>
+</ng-template>
+<div class="modal my_modal" [ngClass]="{ 'is-active' : functionLogDetailFound }">
+  <div class="modal-background" (click)="functionLogDetailFound = !functionLogDetailFound"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Log details</p>
+      <button class="delete" aria-label="close" (click)="functionLogDetailFound = !functionLogDetailFound"></button>
+    </header>
+    <section class="modal-card-body">
+      <textarea class="textarea" placeholder="{{functionLogDetailsData.log}}" readonly>{{functionLogDetailsData.log}}</textarea>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button" (click)="functionLogDetailFound = !functionLogDetailFound">Close</button>
+    </footer>
+  </div>
+</div>
